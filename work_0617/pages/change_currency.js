@@ -1,38 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 import Header from '../components/Header';
-import {check} from '../components/Get_rate';
-import {all_rate} from '../components/Get_rate';
-
-
-check();
-
-let howMuch;
-let new_howMuch;
-let selected_rate;
-let currencyA = 'EUR';
-let currencyB = 'EUR';
-let currencies = {};
 
 
 class SelectCurrency extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {currency: 'nothing'};
 		this.handleChange = this.handleChange.bind(this);
+		//this.state = {order: this.props.order}
 	}
 
 	handleChange(event) {
-		currencies[this.props.order] = event.target.value;
-		if (currencies.first && currencies.second) {
-			selected_rate = all_rate.rates[currencies.first]/all_rate.rates[currencies.second];
-		}
+		const order = this.props.order;
+		const selected = event.target.value;
+		this.props.onChange(selected, order);
 	}
 
 	render() {
-		let temp_arr = [<option value="nothing">請選擇</option>];
-		for (let item in all_rate.rates) {
+		let temp_arr = [<option value="">請選擇</option>];
+		let all_rate = this.props.all_rate;
+		for (let item in all_rate.data.rates) {
 			temp_arr.push(<option value={item}>{item}</option>);
 		}
 		return <select onChange={this.handleChange}>{temp_arr}</select>;
@@ -43,128 +32,87 @@ class SelectCurrency extends React.Component {
 class InputCurrency extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {amount: 0};
 		this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleChange(event) {
 		const howMuch = event.target.value;
-		console.log(selected_rate);
-
-		new_howMuch = howMuch/selected_rate;
-
-		this.setState({amount: new_howMuch});
+		this.props.onChange(howMuch);
 	}
 
 	render() {
 		return (
 			<div>
 				請輸入您想要換匯的金額<br />
-				<input type="text" onChange={this.handleChange} /><span>{}</span><br />
+				<input type="text" onChange={this.handleChange} /><span>{this.props.currency.first}</span><br />
 				總共可換成<br />
-				<input type="text" readonly="readonly" value={this.state.amount}/>
+				<input type="text" readonly="readonly" value={this.props.amount}/><span>{this.props.currency.second}</span>
 			</div>
 		)
 	}
 }
 
 
-class ChangeCurrency extends React.Component {
+class Exchange extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {amount: 0, currency: {first: null, second: null}, selected_rate: null, all_rate: {data: {rates: null}}};
+		this.changeSelect = this.changeSelect.bind(this);
+		this.changeInput = this.changeInput.bind(this);
+
+	}
+	componentDidMount() {
+		let self = this;
+
+		axios.get('http://data.fixer.io/api/latest?access_key=e8984e205db89c1c5523644643ed7d28')
+		.then(function (response) {
+			self.setState({all_rate: response});
+		})
+		.catch(function (error) {
+		})
 	}
 
+	changeSelect(selected, order) {
+		const currencies = this.state.currency;
+		currencies[order] = selected;
+		console.log(currencies);
+		this.setState({currency: currencies});
+		if (currencies.first != null && currencies.second != null) {
+			this.setState({
+				selected_rate: this.state.all_rate.data.rates[currencies.first]/this.state.all_rate.data.rates[currencies.second]
+			})
+		}
+	}
 
-
-	
+	changeInput(howMuch) {
+		const new_howMuch = howMuch/this.state.selected_rate;
+		this.setState({amount: new_howMuch});
+	}
 
 	render() {
 		return (
 			<div className="text-center p-3">
 				我想要將
-				<SelectCurrency order="first" />
+				<SelectCurrency onChange={this.changeSelect} order="first" all_rate={this.state.all_rate} />
 				換成
-				<SelectCurrency order="second" />
+				<SelectCurrency onChange={this.changeSelect} order="second" all_rate={this.state.all_rate} />
 				<br />
-				<InputCurrency currency={this} />
+				<InputCurrency onChange={this.changeInput} amount={this.state.amount} currency={this.state.currency}/>
 			</div>
 		)
 	}
 }
-
-
-/*
-function change_currency() {
-	return (
-		<div ya="xxx">
-			<Header />
-
-
-			<div className="text-center p-3">
-				<p className="m-0">我想要將
-				<select id="currencyA" onChange={renewCurrency}>
-					<option value="nothing">請選擇</option>
-					<option value="EUR">歐元</option>
-					<option value="JPY">日圓</option>
-					<option value="USD">美金</option>
-				</select>
-				換成
-				<select id="currencyB" onChange={renewCurrency}>
-					<option value="nothing">請選擇</option>
-					<option value="EUR">歐元</option>
-					<option value="JPY">日圓</option>
-					<option value="USD">美金</option>
-				</select>
-				</p>
-
-				<br />
-
-				請輸入您想要換匯的金額
-				<br />
-				<input id="howMuch_input" type="text" onChange={change} /><span id="currencyA_2"></span>
-				<br />
-				總共可換成
-				<br />
-				<input id="new_input" type="text" readonly="readonly"/><span id="currencyB_2"></span>
-
-
-			</div>
-		</div>
-	)
-}
-
-
-
-function renewCurrency() {
-	if (document.getElementById('currencyA').value != 'nothing' && document.getElementById('currencyB').value != 'nothing') {
-		currencyA = document.getElementById('currencyA').value;
-		currencyB = document.getElementById('currencyB').value;
-
-		document.getElementById('currencyA_2').innerHTML=currencyA;
-		document.getElementById('currencyB_2').innerHTML=currencyB;
-
-		selected_rate = all_rate.rates[currencyB]/all_rate.rates[currencyA];
-		console.log(selected_rate);
-	}
-}
-
-function change() {
-	howMuch = document.getElementById('howMuch_input').value;
-	let new_howMuch = howMuch*selected_rate;
-	console.log(new_howMuch);
-	document.getElementById('new_input').setAttribute('value', new_howMuch);
-}
-*/
 
 
 function change_currency_app() {
 	return (
 		<div>
 			<Header />
-			<ChangeCurrency />
+			<Exchange />
 		</div>
 	)
 }
 
+
 export default change_currency_app
-//ReactDOM.render(<ChangeCurrency />, document.getElementById('app'));
+//ReactDOM.render(<Exchange />, document.getElementById('app'));

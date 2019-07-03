@@ -1,0 +1,7 @@
+.hover-show {
+	display: none;
+}
+	
+.hover-show:hover {
+	display: inline;
+}

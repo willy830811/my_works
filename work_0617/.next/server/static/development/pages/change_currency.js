@@ -93,47 +93,6 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/Get_rate.js":
-/*!********************************!*\
-  !*** ./components/Get_rate.js ***!
-  \********************************/
-/*! exports provided: check, all_rate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "check", function() { return check; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "all_rate", function() { return all_rate; });
-var all_rate;
-
-function check() {
-  var xmlHTTP;
-
-  function $_xmlHttpRequest() {
-    if (window.ActiveXObject) {
-      xmlHTTP = new ActiveXObject("Microsoft.XMLHTTP");
-    } else if (window.XMLHttpRequest) {
-      xmlHTTP = new XMLHttpRequest();
-    }
-  }
-
-  $_xmlHttpRequest();
-  xmlHTTP.open("GET", "http://data.fixer.io/api/latest?access_key=e8984e205db89c1c5523644643ed7d28", false);
-
-  xmlHTTP.onreadystatechange = function check_user() {
-    if (xmlHTTP.readyState == 4 && xmlHTTP.status == 200) {
-      var str = xmlHTTP.responseText;
-      all_rate = JSON.parse(str);
-    }
-  };
-
-  xmlHTTP.send(null);
-}
-
-
-
-/***/ }),
-
 /***/ "./components/Header.js":
 /*!******************************!*\
   !*** ./components/Header.js ***!
@@ -1092,8 +1051,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-dom */ "react-dom");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
-/* harmony import */ var _components_Get_rate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Get_rate */ "./components/Get_rate.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
 
 
 
@@ -1106,14 +1066,6 @@ var _jsxFileName = "C:\\Users\\\u674E\u5A01\\Desktop\\my_works\\work_0617\\pages
 
 
 
-Object(_components_Get_rate__WEBPACK_IMPORTED_MODULE_9__["check"])();
-var howMuch;
-var new_howMuch;
-var selected_rate;
-var currencyA = 'EUR';
-var currencyB = 'EUR';
-var currencies = {};
-
 var SelectCurrency =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1125,40 +1077,37 @@ function (_React$Component) {
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, SelectCurrency);
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(SelectCurrency).call(this, props));
-    _this.state = {
-      currency: 'nothing'
-    };
-    _this.handleChange = _this.handleChange.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.handleChange = _this.handleChange.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this)); //this.state = {order: this.props.order}
+
     return _this;
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(SelectCurrency, [{
     key: "handleChange",
     value: function handleChange(event) {
-      currencies[this.props.order] = event.target.value;
-
-      if (currencies.first && currencies.second) {
-        selected_rate = _components_Get_rate__WEBPACK_IMPORTED_MODULE_9__["all_rate"].rates[currencies.first] / _components_Get_rate__WEBPACK_IMPORTED_MODULE_9__["all_rate"].rates[currencies.second];
-      }
+      var order = this.props.order;
+      var selected = event.target.value;
+      this.props.onChange(selected, order);
     }
   }, {
     key: "render",
     value: function render() {
       var temp_arr = [react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("option", {
-        value: "nothing",
+        value: "",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 22
         },
         __self: this
       }, "\u8ACB\u9078\u64C7")];
+      var all_rate = this.props.all_rate;
 
-      for (var item in _components_Get_rate__WEBPACK_IMPORTED_MODULE_9__["all_rate"].rates) {
+      for (var item in all_rate.data.rates) {
         temp_arr.push(react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("option", {
           value: item,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 36
+            lineNumber: 25
           },
           __self: this
         }, item));
@@ -1168,7 +1117,7 @@ function (_React$Component) {
         onChange: this.handleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 27
         },
         __self: this
       }, temp_arr);
@@ -1189,9 +1138,6 @@ function (_React$Component2) {
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, InputCurrency);
 
     _this2 = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(InputCurrency).call(this, props));
-    _this2.state = {
-      amount: 0
-    };
     _this2.handleChange = _this2.handleChange.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2));
     return _this2;
   }
@@ -1200,8 +1146,130 @@ function (_React$Component2) {
     key: "handleChange",
     value: function handleChange(event) {
       var howMuch = event.target.value;
-      console.log(selected_rate);
-      new_howMuch = howMuch / selected_rate;
+      this.props.onChange(howMuch);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 45
+        },
+        __self: this
+      }, "\u8ACB\u8F38\u5165\u60A8\u60F3\u8981\u63DB\u532F\u7684\u91D1\u984D", react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 46
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
+        type: "text",
+        onChange: this.handleChange,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 47
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 47
+        },
+        __self: this
+      }, this.props.currency.first), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 47
+        },
+        __self: this
+      }), "\u7E3D\u5171\u53EF\u63DB\u6210", react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 48
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
+        type: "text",
+        readonly: "readonly",
+        value: this.props.amount,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49
+        },
+        __self: this
+      }, this.props.currency.second));
+    }
+  }]);
+
+  return InputCurrency;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
+
+var Exchange =
+/*#__PURE__*/
+function (_React$Component3) {
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Exchange, _React$Component3);
+
+  function Exchange(props) {
+    var _this3;
+
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, Exchange);
+
+    _this3 = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(Exchange).call(this, props));
+    _this3.state = {
+      amount: 0,
+      currency: {
+        first: null,
+        second: null
+      },
+      selected_rate: null,
+      all_rate: {
+        data: {
+          rates: null
+        }
+      }
+    };
+    _this3.changeSelect = _this3.changeSelect.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this3));
+    _this3.changeInput = _this3.changeInput.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this3));
+    return _this3;
+  }
+
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Exchange, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var self = this;
+      axios__WEBPACK_IMPORTED_MODULE_8___default.a.get('http://data.fixer.io/api/latest?access_key=e8984e205db89c1c5523644643ed7d28').then(function (response) {
+        self.setState({
+          all_rate: response
+        });
+      }).catch(function (error) {});
+    }
+  }, {
+    key: "changeSelect",
+    value: function changeSelect(selected, order) {
+      var currencies = this.state.currency;
+      currencies[order] = selected;
+      console.log(currencies);
+      this.setState({
+        currency: currencies
+      });
+
+      if (currencies.first != null && currencies.second != null) {
+        this.setState({
+          selected_rate: this.state.all_rate.data.rates[currencies.first] / this.state.all_rate.data.rates[currencies.second]
+        });
+      }
+    }
+  }, {
+    key: "changeInput",
+    value: function changeInput(howMuch) {
+      var new_howMuch = howMuch / this.state.selected_rate;
       this.setState({
         amount: new_howMuch
       });
@@ -1210,200 +1278,75 @@ function (_React$Component2) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 61
-        },
-        __self: this
-      }, "\u8ACB\u8F38\u5165\u60A8\u60F3\u8981\u63DB\u532F\u7684\u91D1\u984D", react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 62
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
-        type: "text",
-        onChange: this.handleChange,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 63
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 63
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 63
-        },
-        __self: this
-      }), "\u7E3D\u5171\u53EF\u63DB\u6210", react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 64
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
-        type: "text",
-        readonly: "readonly",
-        value: this.state.amount,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 65
-        },
-        __self: this
-      }));
-    }
-  }]);
-
-  return InputCurrency;
-}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
-
-var ChangeCurrency =
-/*#__PURE__*/
-function (_React$Component3) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(ChangeCurrency, _React$Component3);
-
-  function ChangeCurrency(props) {
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, ChangeCurrency);
-
-    return Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(ChangeCurrency).call(this, props));
-  }
-
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(ChangeCurrency, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         className: "text-center p-3",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 83
+          lineNumber: 94
         },
         __self: this
       }, "\u6211\u60F3\u8981\u5C07", react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(SelectCurrency, {
+        onChange: this.changeSelect,
         order: "first",
+        all_rate: this.state.all_rate,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 85
+          lineNumber: 96
         },
         __self: this
       }), "\u63DB\u6210", react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(SelectCurrency, {
+        onChange: this.changeSelect,
         order: "second",
+        all_rate: this.state.all_rate,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 98
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 88
+          lineNumber: 99
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(InputCurrency, {
-        currency: this,
+        onChange: this.changeInput,
+        amount: this.state.amount,
+        currency: this.state.currency,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 89
+          lineNumber: 100
         },
         __self: this
       }));
     }
   }]);
 
-  return ChangeCurrency;
+  return Exchange;
 }(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
-/*
-function change_currency() {
-	return (
-		<div ya="xxx">
-			<Header />
-
-
-			<div className="text-center p-3">
-				<p className="m-0">我想要將
-				<select id="currencyA" onChange={renewCurrency}>
-					<option value="nothing">請選擇</option>
-					<option value="EUR">歐元</option>
-					<option value="JPY">日圓</option>
-					<option value="USD">美金</option>
-				</select>
-				換成
-				<select id="currencyB" onChange={renewCurrency}>
-					<option value="nothing">請選擇</option>
-					<option value="EUR">歐元</option>
-					<option value="JPY">日圓</option>
-					<option value="USD">美金</option>
-				</select>
-				</p>
-
-				<br />
-
-				請輸入您想要換匯的金額
-				<br />
-				<input id="howMuch_input" type="text" onChange={change} /><span id="currencyA_2"></span>
-				<br />
-				總共可換成
-				<br />
-				<input id="new_input" type="text" readonly="readonly"/><span id="currencyB_2"></span>
-
-
-			</div>
-		</div>
-	)
-}
-
-
-
-function renewCurrency() {
-	if (document.getElementById('currencyA').value != 'nothing' && document.getElementById('currencyB').value != 'nothing') {
-		currencyA = document.getElementById('currencyA').value;
-		currencyB = document.getElementById('currencyB').value;
-
-		document.getElementById('currencyA_2').innerHTML=currencyA;
-		document.getElementById('currencyB_2').innerHTML=currencyB;
-
-		selected_rate = all_rate.rates[currencyB]/all_rate.rates[currencyA];
-		console.log(selected_rate);
-	}
-}
-
-function change() {
-	howMuch = document.getElementById('howMuch_input').value;
-	let new_howMuch = howMuch*selected_rate;
-	console.log(new_howMuch);
-	document.getElementById('new_input').setAttribute('value', new_howMuch);
-}
-*/
-
 
 function change_currency_app() {
   return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 162
+      lineNumber: 109
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 163
+      lineNumber: 110
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(ChangeCurrency, {
+  }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Exchange, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 164
+      lineNumber: 111
     },
     __self: this
   }));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (change_currency_app); //ReactDOM.render(<ChangeCurrency />, document.getElementById('app'));
+/* harmony default export */ __webpack_exports__["default"] = (change_currency_app); //ReactDOM.render(<Exchange />, document.getElementById('app'));
 
 /***/ }),
 
@@ -1416,6 +1359,17 @@ function change_currency_app() {
 
 module.exports = __webpack_require__(/*! C:\Users\李威\Desktop\my_works\work_0617\pages\change_currency.js */"./pages/change_currency.js");
 
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
