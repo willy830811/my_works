@@ -9,7 +9,8 @@ import CouponContent from '../components/CouponContent'
 //let n = 0;
 
 const mapStateToProps = state => ({
-  content: state.data[state.data_now.index_shop].event[state.data_now.index_coupon].detail
+	coupon: state.data[state.data_now.index_shop].event,
+	content: state.data[state.data_now.index_shop].event[state.data_now.index_coupon]
 })
 
 /*
@@ -19,5 +20,5 @@ const mapDispatchToProps = dispatch => ({
 */
 
 export default connect(
-  mapStateToProps
+	mapStateToProps
 )(CouponContent)

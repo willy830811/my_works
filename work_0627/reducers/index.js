@@ -15,7 +15,7 @@ const browsing_mode = (state = 'list', action) => {
 			return state === 'list' ? 'map' : 'list'
 		default:
 			return state
-  }
+	}
 }
 
 const data = (state = response_default, action) => {
@@ -27,16 +27,19 @@ const data = (state = response_default, action) => {
 	}
 }
 
-const data_now = (state = {index_shop: 0, index_coupon: 0}, action) => {
+const data_now = (state = {index_marker: 0, index_shop: 0, index_coupon: 0}, action) => {
 	switch (action.type) {
-		case 'SELECT_SHOP':
+		case 'SELECT_MARKER':
 			console.log(action.index);
+			return Object.assign({}, state, {index_marker: action.index})
+		case 'SELECT_SHOP':
 			return Object.assign({}, state, {index_shop: action.index})
 		case 'SELECT_COUPON':
+			console.log('1');
 			return Object.assign({}, state, {index_coupon: action.index})
 		default:
 			return state
-  }
+	}
 }
 
 const page_now = (state = 'shop_list', action) => {
@@ -57,6 +60,7 @@ const page_now = (state = 'shop_list', action) => {
 				case 'shop_list':
 					return 'coupon_list'
 				case 'coupon_list':
+					console.log('2');
 					return 'coupon_content'
 				case 'coupon_content':
 					return 'coupon_content'
@@ -69,8 +73,8 @@ const page_now = (state = 'shop_list', action) => {
 }
 
 export default combineReducers({
-  browsing_mode,
-  data,
-  data_now,
-  page_now
+	browsing_mode,
+	data,
+	data_now,
+	page_now
 })

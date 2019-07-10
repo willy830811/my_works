@@ -11,11 +11,10 @@ import App from '../components/App'
 import { downloadData } from '../actions'
 
 
-
 const store = createStore(reducer);
 
 function callData() {
-	axios.post('http://test1.hokhang.com/hksCloudService/getEventService.php?appId=119871&dataGroupCode=01&primaryCategory=&secondarCategory=&index=0&limit=5&lat=24.986913&lon=121.455948'
+	axios.post('http://test1.hokhang.com/hksCloudService/getEventService.php?appId=119871&dataGroupCode=01&primaryCategory=&index=0&limit=5&lat=24.986913&lon=121.455948'
 		).then(function (response) {
 			console.log(store.getState());
 			store.dispatch(downloadData(response.data.branch));
@@ -35,5 +34,7 @@ function Index() {
 		</Provider>
 	)
 }
+
+
 
 export default Index

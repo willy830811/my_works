@@ -2,9 +2,19 @@ export const toggleMode = () => ({
 	type: 'TOGGLE_MODE'
 })
 
+export const detectHeight = () => ({
+	type: 'DETECT_HEIGHT',
+	window_height
+})
+
 export const downloadData = raw_data => ({
 	type: 'DOWNLOAD_DATA',
 	raw_data
+})
+
+export const selectMarker = index => ({
+	type: 'SELECT_MARKER',
+	index
 })
 
 export const selectShop = index => ({
