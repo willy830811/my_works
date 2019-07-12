@@ -23,7 +23,7 @@ class ShopItem extends React.Component {
 					</div>
 					<div style={{flex: '1'}}>
 						<p style={{fontSize: '15px', color: '#4a4a4a', letterSpacing: '-0.36px', marginBottom: '5px'}}>{content.name}</p>
-						<p className="d-flex d-md-none" style={Object.assign({}, style, {fontSize: '14px', color: '#767676', letterSpacing: '-0.34px', marginBottom: '13px'})}>{content.event[0].title}</p>
+						<p className="d-block d-md-none" style={Object.assign({}, style, {fontSize: '14px', color: '#767676', letterSpacing: '-0.34px', marginBottom: '13px'})}>{content.event[0].title}</p>
 
 						<div>
 							<div style={{display: 'inline-block', lineHeight: '0', float: 'left'}}>

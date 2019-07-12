@@ -3,23 +3,37 @@ import axios from 'axios'
 import { downloadData } from '../actions'
 
 
-let limit;
-let lat;
-let lon;
+let index = 0;
+let limit = 10;
+let lat = 25;
+let lon = 121;
+/*
+if (typeof window !== 'undefined') {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(res){
+			console.log(res.coords);
+			lat = res.coords.latitude;
+			lon = res.coords.longitude;
+		}, function(error){
+			console.log(error);
+			
+		});
+	} else {
+		console.log("Geolocation is not supported by this browser.");
+	}
+}
+*/
+
 
 function DownloadData() {
-	console.log('toto');
-	axios.post('http://test1.hokhang.com/hksCloudService/getEventService.php?appId=119871&dataGroupCode=01&primaryCategory=&index=0&limit=5&lat=24.986913&lon=121.455948'
+	const store = window.appStore
+
+	axios.post('http://test1.hokhang.com/hksCloudService/getEventService.php?appId=119871&dataGroupCode=01&primaryCategory=&index='+index+'&limit='+limit+'&lat='+lat+'&lon='+lon
 		).then(function (response) {
-			console.log(store.getState());
-			//store.dispatch(downloadData(response.data.branch));
-			downloadData()
-			console.log(store.getState());
+			store.dispatch(downloadData(response.data.branch));
 		}).catch(function (error) {
-			console.log('error');
+			console.log(error);
 	});
 }
-
-
 
 export default DownloadData

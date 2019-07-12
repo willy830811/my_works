@@ -2,9 +2,9 @@ export const toggleMode = () => ({
 	type: 'TOGGLE_MODE'
 })
 
-export const detectHeight = () => ({
-	type: 'DETECT_HEIGHT',
-	window_height
+export const getLocation = location => ({
+	type: 'GET_LOCATION',
+	location
 })
 
 export const downloadData = raw_data => ({

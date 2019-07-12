@@ -97,13 +97,13 @@ module.exports =
 /*!**************************!*\
   !*** ./actions/index.js ***!
   \**************************/
-/*! exports provided: toggleMode, detectHeight, downloadData, selectMarker, selectShop, selectCoupon, previousPage, nextPage */
+/*! exports provided: toggleMode, getLocation, downloadData, selectMarker, selectShop, selectCoupon, previousPage, nextPage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleMode", function() { return toggleMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectHeight", function() { return detectHeight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLocation", function() { return getLocation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "downloadData", function() { return downloadData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectMarker", function() { return selectMarker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectShop", function() { return selectShop; });
@@ -115,10 +115,10 @@ var toggleMode = function toggleMode() {
     type: 'TOGGLE_MODE'
   };
 };
-var detectHeight = function detectHeight() {
+var getLocation = function getLocation(location) {
   return {
-    type: 'DETECT_HEIGHT',
-    window_height: window_height
+    type: 'GET_LOCATION',
+    location: location
   };
 };
 var downloadData = function downloadData(raw_data) {
@@ -222,7 +222,7 @@ function (_React$Component) {
                 return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_containers_LoadedShop__WEBPACK_IMPORTED_MODULE_9__["default"], {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 22
+                    lineNumber: 21
                   },
                   __self: this
                 });
@@ -231,7 +231,7 @@ function (_React$Component) {
                 return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ShopMap__WEBPACK_IMPORTED_MODULE_12__["default"], {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 24
+                    lineNumber: 23
                   },
                   __self: this
                 });
@@ -241,7 +241,7 @@ function (_React$Component) {
             return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_containers_LoadedCoupon__WEBPACK_IMPORTED_MODULE_10__["default"], {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 27
+                lineNumber: 26
               },
               __self: this
             });
@@ -250,7 +250,7 @@ function (_React$Component) {
             return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_containers_LoadedContent__WEBPACK_IMPORTED_MODULE_11__["default"], {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 29
+                lineNumber: 28
               },
               __self: this
             });
@@ -294,26 +294,26 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 46
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 47
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 48
         },
         __self: this
       }, "\u597D\u5EB7\u591A"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("meta", {
         charSet: "utf-8",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 50
+          lineNumber: 49
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("meta", {
@@ -321,7 +321,7 @@ function (_React$Component) {
         content: "initial-scale=1.0, width=device-width",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 50
         },
         __self: this
       })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -334,7 +334,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53
+          lineNumber: 52
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("script", {
@@ -343,7 +343,7 @@ function (_React$Component) {
         crossOrigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 54
+          lineNumber: 53
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("script", {
@@ -352,7 +352,7 @@ function (_React$Component) {
         crossOrigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 55
+          lineNumber: 54
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("link", {
@@ -362,7 +362,7 @@ function (_React$Component) {
         crossOrigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 56
+          lineNumber: 55
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("script", {
@@ -371,7 +371,7 @@ function (_React$Component) {
         crossOrigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57
+          lineNumber: 56
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("meta", {
@@ -379,13 +379,13 @@ function (_React$Component) {
         content: "text/html; charset=utf-8",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58
+          lineNumber: 57
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_8__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 58
         },
         __self: this
       }), page_now()));
@@ -452,8 +452,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         className: "container-fluid",
         style: {
-          padding: '0',
-          marginTop: '22px'
+          padding: '70px 0 0 0'
         },
         __source: {
           fileName: _jsxFileName,
@@ -461,9 +460,12 @@ function (_React$Component) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "row",
+        className: "row d-none d-md-flex",
         style: {
-          margin: '0'
+          position: 'relative',
+          height: '62px',
+          margin: '0',
+          zIndex: '1'
         },
         __source: {
           fileName: _jsxFileName,
@@ -471,29 +473,73 @@ function (_React$Component) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "col-12 col-md-4",
+        className: "col-4",
         style: {
-          padding: '0 6px 10px 6px'
+          padding: '0'
         },
         __source: {
           fileName: _jsxFileName,
           lineNumber: 14
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ShopBanner__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "col-8",
+        style: {
+          padding: '0'
+        },
         __source: {
           fileName: _jsxFileName,
           lineNumber: 15
         },
         __self: this
-      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "col-12 col-md-8",
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
         style: {
-          padding: '0 6px 27px 6px'
+          margin: '6px 0 0 0',
+          fontSize: '26px',
+          letterSpacing: '-0.63px',
+          color: '#232323'
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18
+          lineNumber: 16
+        },
+        __self: this
+      }, "\u512A\u60E0\u5167\u5BB9"))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "row",
+        style: {
+          margin: '0',
+          padding: '0 6px 10px 6px'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "col-12 col-md-4",
+        style: {
+          padding: '0',
+          marginBottom: '10px'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ShopBanner__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21
+        },
+        __self: this
+      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "col-12 col-md-8",
+        style: {
+          padding: '0'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 23
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -505,7 +551,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 19
+          lineNumber: 24
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
@@ -517,7 +563,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 25
         },
         __self: this
       }, content.title), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
@@ -529,7 +575,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
+          lineNumber: 26
         },
         __self: this
       }, "\u6D3B\u52D5\u6642\u9593\uFF1A", this.props.content.startDate, " - ", this.props.content.endDate), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
@@ -541,7 +587,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 22
+          lineNumber: 27
         },
         __self: this
       }, content.detail)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -550,7 +596,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 24
+          lineNumber: 29
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
@@ -562,7 +608,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 30
         },
         __self: this
       }, "\u6CE8\u610F\u4E8B\u9805"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
@@ -574,7 +620,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 31
         },
         __self: this
       }, content.note)))));
@@ -637,6 +683,8 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
         style: {
+          position: 'relative',
+          marginBottom: '6px',
           backgroundColor: '#fff6ee',
           borderRadius: '2px',
           boxShadow: '0 2px 4px 0 rgba(163, 162, 162, 0.5)',
@@ -650,23 +698,11 @@ function (_React$Component) {
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         style: {
-          display: 'flex',
-          position: 'relative',
-          marginBottom: '6px'
-        },
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 7
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        style: {
-          flex: '1',
           padding: '12px 0 11px 13px'
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 8
+          lineNumber: 7
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
@@ -678,20 +714,20 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 9
+          lineNumber: 8
         },
         __self: this
       }, this.props.content.title), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
+        className: "d-none d-md-block",
         style: {
           fontSize: '14px',
           color: '#9b9b9b',
           letterSpacing: '-0.34px',
           margin: '0'
         },
-        className: "d-none d-md-block",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 10
+          lineNumber: 9
         },
         __self: this
       }, "\u6D3B\u52D5\u6642\u9593\uFF1A", this.props.content.startDate, " - ", this.props.content.endDate)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
@@ -706,10 +742,10 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 12
+          lineNumber: 11
         },
         __self: this
-      })));
+      }));
     }
   }]);
 
@@ -775,8 +811,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         className: "container-fluid",
         style: {
-          padding: '0',
-          marginTop: '22px'
+          padding: '70px 0 0 0'
         },
         __source: {
           fileName: _jsxFileName,
@@ -784,9 +819,12 @@ function (_React$Component) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "row",
+        className: "row d-none d-md-flex",
         style: {
-          margin: '0'
+          position: 'relative',
+          height: '62px',
+          margin: '0',
+          zIndex: '1'
         },
         __source: {
           fileName: _jsxFileName,
@@ -794,36 +832,80 @@ function (_React$Component) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "col-12 col-md-4",
+        className: "col-4",
         style: {
-          padding: '0 6px 10px 6px'
+          padding: '0'
         },
         __source: {
           fileName: _jsxFileName,
           lineNumber: 22
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ShopBanner__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "col-8",
+        style: {
+          padding: '0'
+        },
         __source: {
           fileName: _jsxFileName,
           lineNumber: 23
         },
         __self: this
-      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "col-12 col-md-8",
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
         style: {
+          margin: '6px 0 0 0',
+          fontSize: '26px',
+          letterSpacing: '-0.63px',
+          color: '#232323'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24
+        },
+        __self: this
+      }, "\u512A\u60E0\u9805\u76EE"))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "row",
+        style: {
+          margin: '0',
           padding: '0 6px 10px 6px'
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 27
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "col-12 col-md-4",
+        style: {
+          padding: '0',
+          marginBottom: '10px'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ShopBanner__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 29
+        },
+        __self: this
+      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "col-12 col-md-8",
+        style: {
+          padding: '0'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 31
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", {
         className: "list-unstyled",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 32
         },
         __self: this
       }, coupons.map(function (coupon, index) {
@@ -836,7 +918,7 @@ function (_React$Component) {
           content: coupon,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 34
           },
           __self: this
         });
@@ -848,6 +930,57 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (CouponList);
+
+/***/ }),
+
+/***/ "./components/DownloadData.js":
+/*!************************************!*\
+  !*** ./components/DownloadData.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./actions/index.js");
+
+
+
+var index = 0;
+var limit = 10;
+var lat = 25;
+var lon = 121;
+/*
+if (typeof window !== 'undefined') {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(res){
+			console.log(res.coords);
+			lat = res.coords.latitude;
+			lon = res.coords.longitude;
+		}, function(error){
+			console.log(error);
+			
+		});
+	} else {
+		console.log("Geolocation is not supported by this browser.");
+	}
+}
+*/
+
+function DownloadData() {
+  var store = window.appStore;
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://test1.hokhang.com/hksCloudService/getEventService.php?appId=119871&dataGroupCode=01&primaryCategory=&index=' + index + '&limit=' + limit + '&lat=' + lat + '&lon=' + lon).then(function (response) {
+    store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["downloadData"])(response.data.branch));
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (DownloadData);
 
 /***/ }),
 
@@ -1443,7 +1576,7 @@ function (_React$Component) {
         },
         __self: this
       }, content.name), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-        className: "d-flex d-md-none",
+        className: "d-block d-md-none",
         style: _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, style, {
           fontSize: '14px',
           color: '#767676',
@@ -1617,7 +1750,8 @@ function (_React$Component) {
       var shops = this.props.shops;
       var selectShop = this.props.selectShop;
       var nextPage = this.props.nextPage;
-      var toggleMode = this.props.toggleMode;
+      var toggleMode = this.props.toggleMode; //, position: 'absolute', right: '24px', top: '9px'
+
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
@@ -1639,12 +1773,10 @@ function (_React$Component) {
         style: {
           position: 'relative',
           width: '100%',
-          height: '62px',
+          height: '49px',
+          marginBottom: '13px',
           paddingLeft: '15px',
           zIndex: '1'
-        },
-        onClick: function onClick() {
-          return toggleMode();
         },
         __source: {
           fileName: _jsxFileName,
@@ -1653,7 +1785,11 @@ function (_React$Component) {
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", {
         style: {
-          margin: '6px 0 0 0',
+          display: 'inline-block',
+          verticalAlign: 'middle',
+          lineHeight: '49px',
+          margin: '0',
+          float: 'left',
           fontSize: '26px',
           letterSpacing: '-0.63px',
           color: '#232323'
@@ -1663,20 +1799,33 @@ function (_React$Component) {
           lineNumber: 17
         },
         __self: this
-      }, "\u512A\u60E0\u5217\u8868"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
-        src: "/static/left-on.svg",
+      }, "\u512A\u60E0\u5217\u8868"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         style: {
-          position: 'absolute',
-          right: '24px',
-          top: '9px',
-          width: '90px'
+          display: 'inline-block',
+          verticalAlign: 'middle',
+          lineHeight: '49px',
+          float: 'right',
+          marginRight: '8px'
+        },
+        onClick: function onClick() {
+          return toggleMode();
         },
         __source: {
           fileName: _jsxFileName,
           lineNumber: 18
         },
         __self: this
-      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
+        src: "/static/left-on.svg",
+        style: {
+          width: '90px'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19
+        },
+        __self: this
+      }))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", {
         className: "row list-unstyled",
         style: {
           margin: '0',
@@ -1684,22 +1833,22 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 22
         },
         __self: this
       }, shops.map(function (shop, index) {
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
+          key: index,
           className: "col-12 col-md-4",
           style: {
             padding: '0'
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 22
+            lineNumber: 24
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          key: index,
           onClick: function onClick() {
             selectShop(index);
             nextPage();
@@ -1707,7 +1856,7 @@ function (_React$Component) {
           content: shop,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 23
+            lineNumber: 25
           },
           __self: this
         }));
@@ -1722,7 +1871,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 31
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
@@ -1732,7 +1881,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 31
         },
         __self: this
       })));
@@ -1810,7 +1959,8 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
   }),
   containerElement: react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
     style: {
-      height: 'calc(100% - 48px)'
+      height: 'calc(100%)',
+      paddingTop: '48px'
     },
     __source: {
       fileName: _jsxFileName,
@@ -1843,20 +1993,101 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
   }
 }), react_google_maps__WEBPACK_IMPORTED_MODULE_11__["withScriptjs"], react_google_maps__WEBPACK_IMPORTED_MODULE_11__["withGoogleMap"])(function (props) {
   return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+    style: {},
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 38
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_google_maps__WEBPACK_IMPORTED_MODULE_11__["GoogleMap"], {
+  }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+    className: "d-none d-md-block",
+    style: {
+      position: 'absolute',
+      top: '48px',
+      width: '100%',
+      height: '84px',
+      paddingLeft: '15px',
+      zIndex: '1',
+      backgroundColor: '#f4f4f4'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+    className: "d-none d-md-block",
+    style: {
+      position: 'absolute',
+      top: '70px',
+      width: '100%',
+      height: '49px',
+      paddingLeft: '15px',
+      zIndex: '1',
+      backgroundColor: '#f4f4f4'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", {
+    style: {
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: '49px',
+      margin: '0',
+      float: 'left',
+      fontSize: '26px',
+      letterSpacing: '-0.63px',
+      color: '#232323'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: this
+  }, "\u512A\u60E0\u5217\u8868"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
+    style: {
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: '49px',
+      float: 'right',
+      marginRight: '8px'
+    },
+    onClick: function onClick() {
+      return props.toggleMode();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("img", {
+    src: "/static/right-on.svg",
+    style: {
+      width: '90px'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: this
+  }))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_google_maps__WEBPACK_IMPORTED_MODULE_11__["GoogleMap"], {
     defaultZoom: 15,
     defaultCenter: {
       lat: 24.986913,
       lng: 121.455948
     },
+    options: {
+      mapTypeControl: false,
+      streetViewControl: false,
+      zoomControl: false,
+      fullscreenControl: false
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 48
     },
     __self: this
   }, props.shops.map(function (shop, index) {
@@ -1872,7 +2103,7 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 54
       },
       __self: this
     }, props.isOpen && props.marker === index && react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_google_maps_lib_components_addons_InfoBox__WEBPACK_IMPORTED_MODULE_14__["InfoBox"], {
@@ -1883,7 +2114,7 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 59
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("ul", {
@@ -1891,7 +2122,7 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
       style: {},
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 56
+        lineNumber: 63
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_ShopItem__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -1902,7 +2133,7 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
       content: props.shops[props.marker],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 57
+        lineNumber: 64
       },
       __self: this
     }))));
@@ -1917,7 +2148,7 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 71
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("img", {
@@ -1927,32 +2158,11 @@ var MyMapComponent = Object(recompose__WEBPACK_IMPORTED_MODULE_10__["compose"])(
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 71
     },
     __self: this
   })));
 });
-/*
-
-*/
-
-/*原infobox內容
-<Marker
-					position={{ lat: 24.97, lng: 121.43 }}
-					onClick={props.onToggleOpen}
-				>
-					{props.isOpen && <InfoBox
-						onCloseClick={props.onToggleOpen}
-						options={{ closeBoxURL: ``, enableEventPropagation: true }}
-					>
-						<div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
-							<div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-								Hello, Kaohsiung!
-							</div>
-						</div>
-					</InfoBox>}
-				</Marker>
-*/
 
 var ShopMap =
 /*#__PURE__*/
@@ -1974,33 +2184,29 @@ function (_React$PureComponent) {
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "state", {
       isMarkerShown: false
-    });
+      /*
+      	componentDidMount() {
+      		this.delayedShowMarker()
+      	}
+      
+      	delayedShowMarker = () => {
+      		setTimeout(() => {
+      			this.setState({ isMarkerShown: true })
+      		}, 3000)
+      	}
+      
+      	handleMarkerClick = (index) => {
+      		this.setState({ isMarkerShown: false })
+      		this.delayedShowMarker()
+      	}
+      */
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "delayedShowMarker", function () {
-      setTimeout(function () {
-        _this.setState({
-          isMarkerShown: true
-        });
-      }, 3000);
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "handleMarkerClick", function (index) {
-      _this.setState({
-        isMarkerShown: false
-      });
-
-      _this.delayedShowMarker();
     });
 
     return _this;
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(ShopMap, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.delayedShowMarker();
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(MyMapComponent, {
@@ -2014,7 +2220,7 @@ function (_React$PureComponent) {
         toggleMode: this.props.toggleMode,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 120
+          lineNumber: 99
         },
         __self: this
       });
@@ -5024,15 +5230,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
-/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/App */ "./components/App.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions */ "./actions/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
+/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/App */ "./components/App.js");
+/* harmony import */ var _components_DownloadData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/DownloadData */ "./components/DownloadData.js");
 var _jsxFileName = "C:\\Users\\\u674E\u5A01\\Desktop\\my_works\\work_0627\\pages\\index.js";
 
 
@@ -5040,33 +5244,27 @@ var _jsxFileName = "C:\\Users\\\u674E\u5A01\\Desktop\\my_works\\work_0627\\pages
 
 
 
- //import {data} from '../components/DownloadData'
 
-
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_4__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"]);
-
-function callData() {
-  axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://test1.hokhang.com/hksCloudService/getEventService.php?appId=119871&dataGroupCode=01&primaryCategory=&index=0&limit=5&lat=24.986913&lon=121.455948').then(function (response) {
-    console.log(store.getState());
-    store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_7__["downloadData"])(response.data.branch));
-    console.log(store.getState());
-  }).catch(function (error) {});
-}
-
-callData();
 
 function Index() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+  var store = Object(redux__WEBPACK_IMPORTED_MODULE_3__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"]);
+
+  if (typeof window !== 'undefined') {
+    window.appStore = store;
+    Object(_components_DownloadData__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
     store: store,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 22
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 23
     },
     __self: this
   }));
@@ -5111,6 +5309,22 @@ var browsing_mode = function browsing_mode() {
   }
 };
 
+var location = function location() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    lat: '121',
+    lon: '25'
+  };
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'GET_LOCATION':
+      return action.location;
+
+    default:
+      return state;
+  }
+};
+
 var data = function data() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : response_default;
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -5134,7 +5348,6 @@ var data_now = function data_now() {
 
   switch (action.type) {
     case 'SELECT_MARKER':
-      console.log(action.index);
       return _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         index_marker: action.index
       });
@@ -5145,7 +5358,6 @@ var data_now = function data_now() {
       });
 
     case 'SELECT_COUPON':
-      console.log('1');
       return _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
         index_coupon: action.index
       });
@@ -5181,7 +5393,6 @@ var page_now = function page_now() {
           return 'coupon_list';
 
         case 'coupon_list':
-          console.log('2');
           return 'coupon_content';
 
         case 'coupon_content':
@@ -5198,6 +5409,7 @@ var page_now = function page_now() {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"])({
   browsing_mode: browsing_mode,
+  location: location,
   data: data,
   data_now: data_now,
   page_now: page_now
